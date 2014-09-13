@@ -9,8 +9,8 @@ var express = require('express'),
     path = require('path'),
     passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy,
-    LinkedInStrategy = require('passport-linkedin').Strategy,
     mongoose = require('mongoose'),
+    lodash = require('lodash'),
     app = express();
 
 mongoose.connect(process.env.MONGO_URL);
@@ -33,6 +33,7 @@ app.use(require('cookie-session')({
     saveUninitialized: true,
     resave: true
 }));
+app.use(require('body-parser').urlencoded());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -57,11 +58,13 @@ passport.use(new TwitterStrategy({
         'provider.name': profile.provider,
         'provider.id': profile.id
     }, function (err, user) {
+        console.log(profile);
         if (user) {
             return done(null, user);
         }
 
         user = new models.User({
+            twitterUsername: profile.username,
             displayName: profile.displayName,
             about: profile._json.description,
             provider: {
@@ -74,6 +77,8 @@ passport.use(new TwitterStrategy({
         });
     });
 }));
+
+app.locals.pageClass = '';
 
 app.get('/login/twitter', passport.authenticate('twitter'));
 app.get('/login/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}),
@@ -89,10 +94,44 @@ app.use('/secure', function (req, res, next) {
     res.redirect('/login');
 });
 
+app.get('/secure', function (req, res) {
+    res.render('mentorSwitch', {
+        title: 'Pick a side',
+        pageClass: 'mentor-switch'
+    });
+})
+
 app.get('/secure/profile', function (req, res) {
     res.render('profile', {
         title: 'Profile',
-        user: req.user
+        user: req.user,
+        pageClass: 'profile-page'
+    });
+});
+
+app.post('/secure/profile', function (req, res) {
+    if (req.body.gender !== req.user.gender) {
+        if (req.body.gender === 'male' || req.body.gender === 'female') {
+            req.body.otherGender = '';
+        }
+    }
+
+    lodash.merge(req.user, req.body);
+    req.user.activated = true;
+    req.user.save(function (err) {
+        if (err && err.name === 'ValidationError') {
+            res.render('profile', {
+                title: 'Profile',
+                user: req.user,
+                validationErrors: lodash.toArray(err.errors),
+                pageClass: 'profile-page'
+            });
+            return;
+        } else if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.redirect('/secure/profile');
     });
 });
 
