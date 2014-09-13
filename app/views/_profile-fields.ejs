@@ -1,0 +1,48 @@
+<div class="form-group">
+    <label for="displayName" class="col-sm-2 control-label">Display Name *</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="displayName" placeholder="Display Name" value="<%= user.displayName %>">
+    </div>
+</div>
+<div class="form-group">
+    <label for="aboutMe" class="col-sm-2 control-label">About Me (160 chars) *</label>
+    <div class="col-sm-10">
+        <textarea name="aboutMe" id="aboutMe" rows="3" class="form-control"><%= user.about %></textarea>
+    </div>
+</div>
+<div class="form-group">
+    <label for="industry" class="col-sm-2 control-label">Industry *</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="industry" value="<%= user.industry %>">
+    </div>
+</div>
+<div class="form-group">
+    <label for="skills" class="col-sm-2 control-label">Skills *</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="skills" value="<%= user.skills %>">
+    </div>
+</div>
+<div class="form-group">
+    <label for="yearsExperience" class="col-sm-2 control-label">Years Experience *</label>
+    <div class="col-sm-10">
+        <label for="yearsExperience1" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience1" value="<3" <% if(user.yearsExperience === '<3'){ %> checked="checked" <% } %>>&lt;3
+        </label>
+        <label for="yearsExperience2" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience2" value="3-5" <% if(user.yearsExperience === '3-5'){ %> checked="checked" <% } %>>3-5
+        </label>
+        <label for="yearsExperience3" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience3" value="6-9" <% if(user.yearsExperience === '6-9'){ %> checked="checked" <% } %>>6-9
+        </label>
+        <label for="yearsExperience4" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience3" value="10" <% if(user.yearsExperience === '10'){ %> checked="checked" <% } %>>10
+        </label>
+        <label for="yearsExperience5" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience3" value="15" <% if(user.yearsExperience === '15'){ %> checked="checked" <% } %>>15
+        </label>
+
+        <label for="yearsExperience6" class="radio-inline">
+            <input type="radio" name="yearsExperience" id="yearsExperience3" value=">20" <% if(user.yearsExperience === '>20'){ %> checked="checked" <% } %>>&gt;20
+        </label>
+    </div>
+</div>

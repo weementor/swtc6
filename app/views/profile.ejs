@@ -1,6 +1,9 @@
 <%- include _header.ejs %>
 <%- include _nav.ejs %>
-<div class="container">
-    <%- include _profile-form.ejs %>
+<div class="container profile-page">
+    <form class="form-horizontal" action="/secure/profile" method="POST">
+        <%- include _profile-fields.ejs %>
+        <button type="submit" class="btn btn-submit">Update Profile</button>
+    </form>
 </div>
 <%- include _footer.ejs %>

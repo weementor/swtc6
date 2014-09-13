@@ -1,1 +1,18 @@
 @import "bootstrap/bootstrap.less";
+@import (inline) "normalize-opentype.css";
+
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
+.profile-page {
+    label {
+        color: @dark-gray;
+    }
+
+    .btn-submit {
+        background-color: @dark-gray;
+        color: @yellow;
+        font-family: @font-family-serif;
+    }
+}

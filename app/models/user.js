@@ -10,14 +10,26 @@ var userSchema = mongoose.Schema({
     },
     about: {
         type: String,
-        required: true,
+        default: '',
         validate: function (val) {
-            return val.length <= 160;
+            return val.length <= 160 && (!this.activated || !!val);
         }
     },
-    industry: String,
-    yearsExperience: Number,
+    industry: {
+        type: String,
+        default: '',
+        validate: function (val) {
+            return !!val || !this.activated;
+        }
+    },
+    yearsExperience: {
+        type: String,
+        default: '<3',
+    },
     knownTopics: [{
+        name: String
+    }],
+    skills: [{
         name: String
     }],
     provider: {
@@ -29,7 +41,10 @@ var userSchema = mongoose.Schema({
             type: String,
             required: true
         },
-
+    },
+    activated: {
+        type: Boolean,
+        default: false
     }
 });
 
