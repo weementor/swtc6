@@ -64,7 +64,6 @@ passport.use(new TwitterStrategy({
         'provider.name': profile.provider,
         'provider.id': profile.id
     }, function (err, user) {
-        console.log(profile);
         if (user) {
             return done(null, user);
         }
@@ -87,7 +86,7 @@ passport.use(new TwitterStrategy({
 app.locals.pageClass = '';
 
 app.get('/login/twitter', passport.authenticate('twitter'));
-app.get('/login/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}),
+app.get('/login/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/'}),
     function (req, res) {
         res.redirect('/secure/profile');
     }
@@ -97,7 +96,7 @@ app.use('/secure', function (req, res, next) {
     if (req.user) {
         return next();
     }
-    res.redirect('/login');
+    res.redirect('/login/twitter');
 });
 
 app.get('/secure', function (req, res) {
@@ -113,12 +112,9 @@ app.get('/secure/profile', function (req, res) {
     res.render('profile', {
         title: 'Profile',
         user: req.user,
-        pageClass: 'profile-page'
+        pageClass: 'profile-page',
+        topics: topics
     });
-});
-
-app.get('/secure/user.json', function (req, res) {
-    res.json(req.user);
 });
 
 app.post('/secure/profile', function (req, res) {
@@ -126,6 +122,10 @@ app.post('/secure/profile', function (req, res) {
         if (req.body.gender === 'male' || req.body.gender === 'female') {
             req.body.otherGender = '';
         }
+    }
+
+    if (req.body.joinedKnownTopics) {
+        req.user.knownTopics = req.body.joinedKnownTopics.split(',');
     }
 
     lodash.merge(req.user, req.body);
@@ -149,7 +149,8 @@ app.post('/secure/profile', function (req, res) {
 
 app.get('/', function (req, res) {
     res.render('index', {
-        title: 'WeeMentor'
+        title: 'WeeMentor',
+        pageClass: 'logged-out'
     });
 });
 

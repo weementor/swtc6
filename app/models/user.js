@@ -54,16 +54,7 @@ var userSchema = mongoose.Schema({
         type: String,
         default: '<3',
     },
-    knownTopics: [{
-        name: {
-            type: String,
-            required: true
-        },
-        active: {
-            type: Boolean,
-            default: true
-        }
-    }],
+    knownTopics: [String],
     skills: {
         type: String,
         default: '',

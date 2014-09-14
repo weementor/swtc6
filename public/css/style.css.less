@@ -24,6 +24,36 @@ body {
     }
 }
 
+.logged-out {
+    background-color: @dark-gray;
+
+    .background-image {
+        background-image: url(/images/homscreen_bkgd_trans-01.png);
+        background-size: 745px 541px;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 541px;
+    }
+
+    .login-button {
+        text-align: center;
+        padding: 20px;
+        color: white;
+        background-color: @twitter-blue;
+        width: 100%;
+        display: block;
+        position: relative;
+        top: 375px;
+        line-height: 1;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+    margin-bottom: 0;
+}
+
 .switcher {
     background: #65aa9d; /* Old browsers */
     background: -moz-linear-gradient(left,  #65aa9d 0%, #65aa9d 50%, #7ac0b4 50.1%, #7ac0b4 100%); /* FF3.6+ */

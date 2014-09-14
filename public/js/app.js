@@ -5,7 +5,7 @@
         FastClick.attach(document.body);
     });
 
-    angular.module('MentorSwitch', ['ui.router']).config([
+    angular.module('MentorSwitch', ['ui.router', 'checklist-model']).config([
         '$stateProvider',
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {

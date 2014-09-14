@@ -1,6 +1,6 @@
 <%- include _header.ejs %>
 <%- include _nav.ejs %>
-<div class="container profile-page">
+<div class="container profile-page" ng-app="checklist-model" ng-init="topics = <%= JSON.stringify(topics) %>; user = <%= JSON.stringify(user) %>">
     <form class="form-horizontal" action="/secure/profile" method="POST">
         <%- include _profile-fields.ejs %>
         <button type="submit" class="btn btn-submit">Update Profile</button>
