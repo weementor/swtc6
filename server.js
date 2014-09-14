@@ -19,9 +19,16 @@ mongoose.connect(process.env.MONGOHQ_URL);
 var models = require('./app/models');
 
 var topics = [
-    'Monkeys',
-    'Bananas',
-    'Trees'
+    'AngularJS',
+    'Career Path',
+    'Culture',
+    'Difficult Co-workers',
+    'Innovation',
+    'Leadership',
+    'Mentorship',
+    'Overcoming Challenges',
+    'Personal Development',
+    'Salary Negotiation'
 ];
 
 app.engine('ejs', cons.ejs);
