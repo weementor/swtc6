@@ -98,6 +98,9 @@ app.locals.pageClass = '';
 app.get('/login/twitter', passport.authenticate('twitter'));
 app.get('/login/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/'}),
     function (req, res) {
+        if (req.user.activated) {
+            return res.redirect('/secure');
+        }
         res.redirect('/secure/profile');
     }
 );
