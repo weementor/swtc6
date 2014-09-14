@@ -148,7 +148,8 @@ app.post('/secure/profile', function (req, res) {
                 title: 'Profile',
                 user: req.user,
                 validationErrors: lodash.toArray(err.errors),
-                pageClass: 'profile-page'
+                pageClass: 'profile-page',
+                topics: topics
             });
             return;
         } else if (err) {
