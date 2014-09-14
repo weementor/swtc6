@@ -15,7 +15,11 @@
                         $scope.body = $scope.user.about;
                     }
                 }
-            ]
+            ],
+            scope: {
+                user: '=user',
+                question: '=question'
+            }
         };
     });
 }());
