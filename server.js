@@ -58,7 +58,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_API_KEY,
     consumerSecret: process.env.TWITTER_API_SECRET,
-    callbackUrl: process.env.host + '/auth/twitter/callback'
+    callbackUrl: process.env.host + '/login/twitter/callback'
 }, function (token, tokenSecret, profile, done) {
     models.User.findOne({
         'provider.name': profile.provider,
