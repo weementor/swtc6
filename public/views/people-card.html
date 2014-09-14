@@ -1,5 +1,5 @@
-<div class="people-card" ui-sref="show-profile({userId: user._id})">
-    <div class="row">
+<div class="people-card">
+    <div class="row" ui-sref="show-profile({userId: user._id})">
         <div class="media">
             <img src="/images/avatar.png" alt="" class="media-object pull-left">
             <h4 class="pull-q" ng-if="isQuestion">Q</h4>
@@ -16,7 +16,7 @@
         <div class="col-xs-3 comments button">
             16
         </div>
-        <div class="col-xs-6 chat button">
+        <div class="col-xs-6 chat button" ui-sref="conversation({userId: user._id})">
             chat now <i class="fa fa-angle-right"></i>
         </div>
     </div>

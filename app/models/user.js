@@ -22,6 +22,7 @@ var userSchema = mongoose.Schema({
     },
     displayName: {
         type: String,
+        default: '',
         unique: true,
         required: true
     },
@@ -62,6 +63,13 @@ var userSchema = mongoose.Schema({
             unique: true
         },
     },
+    phoneNumber: {
+        type: String,
+        default: '',
+        validate: function (val) {
+            return !!val || !this.activated;
+        }
+    },
     activated: {
         type: Boolean,
         default: false
@@ -69,7 +77,11 @@ var userSchema = mongoose.Schema({
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question'
-    }]
+    }],
+    conversation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Conversation'
+    }
 });
 
 userSchema.virtual('displayableName').get(function () {

@@ -11,6 +11,8 @@ var express = require('express'),
     TwitterStrategy = require('passport-twitter').Strategy,
     mongoose = require('mongoose'),
     lodash = require('lodash'),
+    twilio = require('twilio'),
+    phone = require('phone'),
     app = express();
 
 mongoose.connect(process.env.MONGOHQ_URL);
@@ -129,6 +131,8 @@ app.post('/secure/profile', function (req, res) {
         req.user.knownTopics = req.body.joinedKnownTopics.split(',');
     }
 
+    req.body.phoneNumber = phone(req.body.phoneNumber)[0];
+
     lodash.merge(req.user, req.body);
     req.user.activated = true;
     req.user.save(function (err) {
@@ -213,6 +217,61 @@ app.post('/secure/user/questions', function (req, res) {
     });
 });
 
+app.post('/secure/conversations', function (req, res) {
+    var fromUser = req.user;
+    models.User.findOne({
+        _id: req.body.toUser
+    }).exec(function (err, toUser) {
+        var conversation = new models.Conversation({
+            _users: [
+                fromUser._id,
+                toUser._id
+            ],
+            phoneNumber: process.env.PHONE_NUMBER
+        });
+        conversation.save(function (err) {
+            if (err) {
+                console.log(err);
+            }
+            fromUser.conversation = conversation._id;
+            toUser.conversation = conversation._id;
+            fromUser.save(function () {
+                toUser.save(function () {
+                    res.json(conversation);
+                });
+            });
+        });
+    });
+});
+
+app.post('/sms/entry', function (req, res) {
+    var fromNumber = phone(req.body.From)[0];
+
+    models.User.findOne({phoneNumber: fromNumber}).populate('conversation').exec(function (err, user) {
+        if (!user.conversation) {
+            return res.end();
+        }
+
+        var conversation = user.conversation;
+
+        models.User.findOne({
+            conversation: conversation._id
+        }).ne('_id', user._id).exec(function (err, toUser) {
+            if (err) {
+                return res.send();
+            }
+
+            var twiml = new twilio.TwimlResponse();
+            twiml.message({
+                to: toUser.phoneNumber
+            }, function () {
+                this.body('' + user.displayName + ': ' + req.body.Body);
+            });
+
+            res.send(twiml.toString());
+        });
+    });
+});
 
 app.get('/', function (req, res) {
     res.render('index', {

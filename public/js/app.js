@@ -29,6 +29,9 @@
             }).state('show-profile', {
                 url: '/user/:userId',
                 templateUrl: 'views/profile.html'
+            }).state('conversation', {
+                url: '/conversation/:userId',
+                templateUrl: 'views/conversation.html'
             });
         }
     ]).run([

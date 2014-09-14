@@ -1,0 +1,32 @@
+<div ng-controller="ConversationController">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>we're pumped to connect you to {{user.displayName}}</h3>
+            <em>choose how to connect</em>
+        </div>
+    </div>
+    <div class="row chat-row conversation-row" ng-click="setupConversation()">
+        <div class="col-xs-4">
+            <i class="fa fa-comment-o"></i>
+        </div>
+        <div class="col-xs-8">
+            <h3>text chat now</h3>
+        </div>
+    </div>
+    <div class="row email-row conversation-row">
+        <div class="col-xs-4">
+            <i class="fa fa-envelope-o"></i>
+        </div>
+        <div class="col-xs-8">
+            <h3>send an email</h3>
+        </div>
+    </div>
+    <div class="row phone-row conversation-row">
+        <div class="col-xs-4">
+            <i class="fa fa-phone"></i>
+        </div>
+        <div class="col-xs-8">
+            <h3>schedule a call</h3>
+        </div>
+    </div>
+</div>
