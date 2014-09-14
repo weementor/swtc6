@@ -153,7 +153,7 @@ app.get('/secure/mentors/:questionId', function (req, res) {
     models.Question.findOne({_id: questionId}).populate('_asker').exec(function (err, question) {
         models.MentorSession.find().where('topics').in([
             question.topic
-        ]).populate('_mentor').exec(function (err, mentors) {
+        ]).where('_mentor').ne(req.user._id).populate('_mentor').exec(function (err, mentors) {
             res.json(mentors);
         });
     });
@@ -193,7 +193,7 @@ app.get('/secure/questions/:mentorSessionId', function (req, res) {
             }
         }).sort({
             created: 'desc'
-        }).populate('_asker').exec(function (err, questions) {
+        }).where('_asker').ne(req.user._id).populate('_asker').exec(function (err, questions) {
             res.json(questions);
         });
     });
