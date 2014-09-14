@@ -154,7 +154,9 @@ app.get('/secure/mentors/:questionId', function (req, res) {
         models.MentorSession.find().where('topics').in([
             question.topic
         ]).where('_mentor').ne(req.user._id).populate('_mentor').exec(function (err, mentors) {
-            res.json(mentors);
+            res.json(lodash.uniq(mentors, function (mentor) {
+                return mentor._mentor._id;
+            }));
         });
     });
 });
