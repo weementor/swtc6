@@ -13,7 +13,7 @@ var express = require('express'),
     lodash = require('lodash'),
     app = express();
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGOHQ_URL);
 var models = require('./app/models');
 
 var topics = [
