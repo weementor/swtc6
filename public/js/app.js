@@ -21,8 +21,14 @@
                 url: '/ask',
                 templateUrl: 'views/ask.html'
             }).state('mentor-list', {
-                url: '/mentor/list',
+                url: '/mentor/list/:mentorSessionId',
                 templateUrl: 'views/mentor-matches.html'
+            }).state('question-list', {
+                url: '/ask/list/:questionId',
+                templateUrl: 'views/question-matches.html'
+            }).state('show-profile', {
+                url: '/user/:userId',
+                templateUrl: 'views/profile.html'
             });
         }
     ]).run([

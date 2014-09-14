@@ -1,11 +1,11 @@
-<div class="people-card">
+<div class="people-card" ui-sref="show-profile({userId: user._id})">
     <div class="row">
         <div class="media">
             <img src="/images/avatar.png" alt="" class="media-object pull-left">
-            <h4 class="pull-q">Q</h4>
+            <h4 class="pull-q" ng-if="isQuestion">Q</h4>
             <div class="media-body">
                 <h4 class="media-heading" ng-bind="user.displayName"></h4>
-                <p ng-bind="user.about"></p>
+                <p ng-bind="body"></p>
             </div>
         </div>
     </div>

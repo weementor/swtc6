@@ -40,6 +40,7 @@ app.use(require('cookie-session')({
     resave: true
 }));
 app.use(require('body-parser').urlencoded());
+app.use(require('body-parser').json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -146,6 +147,70 @@ app.post('/secure/profile', function (req, res) {
         res.redirect('/secure/profile');
     });
 });
+
+app.get('/secure/mentors/:questionId', function (req, res) {
+    var questionId = req.param('questionId');
+    models.Question.findOne({_id: questionId}).populate('_asker').exec(function (err, question) {
+        models.MentorSession.find().where('topics').in([
+            question.topic
+        ]).populate('_mentor').exec(function (err, mentors) {
+            res.json(mentors);
+        });
+    });
+});
+
+app.post('/secure/mentors', function (req, res) {
+    var mentorSession = new models.MentorSession(req.body);
+    mentorSession._mentor = req.user._id;
+    mentorSession.save(function (err) {
+        if (err) {
+            return res.status(407).json(err);
+        }
+
+        res.json(mentorSession);
+    });
+});
+
+app.get('/secure/user/questions', function (req, res) {
+    models.Question.find({_asker: req.user.id}).populate('_asker').exec(function (err, questions) {
+        res.json(questions);
+    });
+});
+
+app.get('/secure/users/:userId', function (req, res) {
+    var userId = req.param('userId');
+    models.User.findOne({_id: userId}).exec(function (err, user) {
+        res.json(user);
+    });
+});
+
+app.get('/secure/questions/:mentorSessionId', function (req, res) {
+    var mentorSessionId = req.param('mentorSessionId');
+    models.MentorSession.findOne({_id: mentorSessionId}).populate('_mentor').exec(function (err, mentorSession) {
+        models.Question.find({
+            'topic': {
+                '$in': mentorSession.topics
+            }
+        }).sort({
+            created: 'desc'
+        }).populate('_asker').exec(function (err, questions) {
+            res.json(questions);
+        });
+    });
+});
+
+app.post('/secure/user/questions', function (req, res) {
+    var question = new models.Question(req.body);
+    question._asker = req.user._id;
+    question.save(function (err) {
+        if (err) {
+            return res.status(407).json(err);
+        }
+
+        res.json(question);
+    });
+});
+
 
 app.get('/', function (req, res) {
     res.render('index', {

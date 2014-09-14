@@ -1,0 +1,7 @@
+<div class="row" ng-controller="QuestionMatchController">
+    <div class="col-sm-12">
+        <em ui-sref="switcher">&#8592; back</em>
+        <h3>we’ve found some people for you:</h3>
+        <div ng-repeat="mentor in mentors" people-card user="mentor.user"></div>
+    </div>
+</div>

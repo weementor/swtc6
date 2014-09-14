@@ -1,0 +1,35 @@
+<div class="container" ng-controller="ProfileController">
+    <div class="profile-card">
+        <div class="row">
+            <div class="media">
+            <div class="pull-left">
+                <img src="/images/avatar.png" alt="" class="media-object">
+                <div class="likes button">
+                    16
+                </div>
+                <div class="comments button">
+                    16
+                </div>
+            </div>
+                <div class="media-body">
+                    <h4 class="media-heading" ng-bind="_user.displayName"></h4>
+                    <ul class="list-inline">
+                        <li ng-bind="_user.industry"></li>
+                        <li class="sub-head" ng-bind="_user.otherGender || _user.gender"></li>
+                    </ul>
+                    <p ng-bind="_user.about"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p class="sub-head">Skills:</p>
+            <p ng-bind="_user.skills"></p>
+        </div>
+        <div class="row">
+            <p class="sub-head">Topics:</p>
+            <ul class="list-inline">
+                <li ng-repeat="topic in _user.knownTopics" ng-bind="topic"></li>
+            </ul>
+        </div>
+    </div>
+</div>

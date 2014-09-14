@@ -9,12 +9,6 @@ var userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    name: {
-        type: String,
-        validate: function (val) {
-            return !!val || !this.activated;
-        }
-    },
     gender: {
         type: String,
         default: '',
@@ -30,11 +24,6 @@ var userSchema = mongoose.Schema({
         type: String,
         unique: true,
         required: true
-    },
-    shouldShowScreenName: {
-        type: Boolean,
-        required: true,
-        default: true
     },
     about: {
         type: String,
@@ -76,7 +65,15 @@ var userSchema = mongoose.Schema({
     activated: {
         type: Boolean,
         default: false
-    }
+    },
+    questions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question'
+    }]
+});
+
+userSchema.virtual('displayableName').get(function () {
+    return this.shouldShowScreenName ? this.displayName : this.name;
 });
 
 module.exports = userSchema;
