@@ -155,7 +155,7 @@ app.post('/secure/profile', function (req, res) {
             res.status(500).send(err);
             return;
         }
-        res.redirect('/secure/profile');
+        res.redirect('/secure');
     });
 });
 
