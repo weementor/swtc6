@@ -10,7 +10,7 @@
             $scope.submit = function submit() {
                 if ($scope.form.$valid) {
                     var submission = {
-                        topics: $scope.user.knownTopics
+                        topics: $scope.currentUser.knownTopics
                     };
 
                     $http({

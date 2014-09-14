@@ -1,6 +1,6 @@
 <%- include _angular-header.ejs %>
 <%- include _nav.ejs %>
-<div ng-init="user = <%= JSON.stringify(user) %>; topics = <%= JSON.stringify(topics) %>">
+<div ng-init="currentUser = <%= JSON.stringify(user) %>; topics = <%= JSON.stringify(topics) %>">
     <div class="container" ui-view></div>
 </div>
 <%- include _footer.ejs %>

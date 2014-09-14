@@ -9,7 +9,7 @@
             <label for="knownTopics" class="col-sm-2 control-label">Topics:</label>
             <div class="col-sm-10">
                 <label ng-repeat="topic in topics" for="knownTopics$index" class="checkbox-inline">
-                    <input type="checkbox" name="knownTopics" id="knownTopics1" checklist-model="user.knownTopics" checklist-value="topic">{{topic}}<br>
+                    <input type="checkbox" name="knownTopics" id="knownTopics1" checklist-model="currentUser.knownTopics" checklist-value="topic">{{topic}}<br>
                 </label>
             </div>
         </div>
