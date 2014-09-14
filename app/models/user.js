@@ -55,11 +55,22 @@ var userSchema = mongoose.Schema({
         default: '<3',
     },
     knownTopics: [{
-        name: String
+        name: {
+            type: String,
+            required: true
+        },
+        active: {
+            type: Boolean,
+            default: true
+        }
     }],
-    skills: [{
-        name: String
-    }],
+    skills: {
+        type: String,
+        default: '',
+        validate: function (val) {
+            return !!val || !this.activated;
+        }
+    },
     provider: {
         name: {
             type: String,

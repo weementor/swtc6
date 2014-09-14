@@ -16,6 +16,12 @@ var express = require('express'),
 mongoose.connect(process.env.MONGO_URL);
 var models = require('./app/models');
 
+var topics = [
+    'Monkeys',
+    'Bananas',
+    'Trees'
+];
+
 app.engine('ejs', cons.ejs);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'app', 'views'));
@@ -97,9 +103,11 @@ app.use('/secure', function (req, res, next) {
 app.get('/secure', function (req, res) {
     res.render('mentorSwitch', {
         title: 'Pick a side',
-        pageClass: 'mentor-switch'
+        pageClass: 'mentor-switch',
+        user: req.user,
+        topics: topics
     });
-})
+});
 
 app.get('/secure/profile', function (req, res) {
     res.render('profile', {
@@ -107,6 +115,10 @@ app.get('/secure/profile', function (req, res) {
         user: req.user,
         pageClass: 'profile-page'
     });
+});
+
+app.get('/secure/user.json', function (req, res) {
+    res.json(req.user);
 });
 
 app.post('/secure/profile', function (req, res) {

@@ -1,15 +1,6 @@
-<%- include _header.ejs %>
+<%- include _angular-header.ejs %>
 <%- include _nav.ejs %>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6 switch-pane">
-            <img src="/images/avatar.png" alt="" class="avatar">
-            <h3>mentor: share your expertise</h3>
-        </div>
-        <div class="col-xs-6 switch-pane">
-            <img src="/images/avatar.png" alt="" class="avatar">
-            <h3>get a mentor: ask a question</h3>
-        </div>
-    </div>
+<div ng-init="user = <%= JSON.stringify(user) %>; topics = <%= JSON.stringify(topics) %>">
+    <div class="container" ui-view></div>
 </div>
 <%- include _footer.ejs %>

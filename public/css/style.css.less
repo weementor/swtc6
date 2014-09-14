@@ -1,8 +1,19 @@
 @import "bootstrap/bootstrap.less";
+@import "font-awesome/font-awesome.less";
 @import (inline) "normalize-opentype.css";
 
 * {
     -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin-bottom: 40px;
+}
+
+.btn-submit {
+    background-color: @dark-gray;
+    color: @yellow;
+    font-family: @font-family-serif;
 }
 
 .profile-page {
@@ -11,16 +22,17 @@
     label {
         color: white;
     }
-
-    .btn-submit {
-        background-color: @dark-gray;
-        color: @yellow;
-        font-family: @font-family-serif;
-    }
 }
 
-.mentor-switch {
-    background-color: @teal;
+.switcher {
+    background: #65aa9d; /* Old browsers */
+    background: -moz-linear-gradient(left,  #65aa9d 0%, #65aa9d 50%, #7ac0b4 50.1%, #7ac0b4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#65aa9d), color-stop(50%,#65aa9d), color-stop(50.1%,#7ac0b4), color-stop(100%,#7ac0b4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  #65aa9d 0%,#65aa9d 50%,#7ac0b4 50.1%,#7ac0b4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  #65aa9d 0%,#65aa9d 50%,#7ac0b4 50.1%,#7ac0b4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  #65aa9d 0%,#65aa9d 50%,#7ac0b4 50.1%,#7ac0b4 100%); /* IE10+ */
+    background: linear-gradient(to right,  #65aa9d 0%,#65aa9d 50%,#7ac0b4 50.1%,#7ac0b4 100%); /* W3C */
+
 
     .avatar {
         max-width: 150px;
@@ -30,5 +42,76 @@
 
     .switch-pane {
         text-align: center;
+        position: absolute;
+        top: 73px;
+        bottom: 0;
+    }
+
+    .left-pane {
+        left: 0;
+    }
+
+    .right-pane {
+        right: 0;
+    }
+}
+
+.mentor, .ask {
+    background-color: @teal;
+}
+
+
+.match-list {
+    background-color: @light-gray;
+}
+
+.people-card {
+    padding: 20px;
+    padding-bottom: 0;
+    background-color: white;
+    img.pull-left {
+        width: 60px;
+        border-radius: 100%;
+        margin-right: 40px;
+    }
+
+    .pull-q {
+        float: left;
+        position: relative;
+        top: 15px;
+        right: 15px;
+        color: @pink;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .second-row {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    color: @dark-gray;
+
+    .button {
+        padding: 5px;
+    }
+
+    .likes {
+        background-color: @pink;
+        color: @yellow;
+    }
+
+    .comments {
+        background-color: @teal;
+        color: @pink;
+    }
+
+    .chat {
+        background-color: @dark-gray;
+        color: @yellow;
+        font-family: @font-family-serif;
+        text-align: right;
     }
 }

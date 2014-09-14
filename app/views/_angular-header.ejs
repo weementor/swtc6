@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MentorSwitch" >
 <head>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <%- css('style') %>
@@ -8,4 +8,4 @@
     <title><%= title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
-<body class="<%= pageClass %>  {{pageClass}}">
+<body ng-class="$state.current.name">
