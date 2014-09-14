@@ -280,6 +280,13 @@ app.post('/sms/entry', function (req, res) {
     });
 });
 
+app.get('/secure/qmunnity', function (req, res) {
+    res.render('qmunnity', {
+        title: 'Q-munnity',
+        pageClass: 'qmunnity'
+    });
+});
+
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'WeeMentor',

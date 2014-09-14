@@ -123,7 +123,9 @@ body {
 
     .button {
         padding: 5px;
+        font-size: 18px;
         margin-bottom: 10px;
+        font-family: @font-family-serif;
     }
 
     .likes {
@@ -139,7 +141,6 @@ body {
     .chat {
         background-color: @dark-gray;
         color: @yellow;
-        font-family: @font-family-serif;
         text-align: right;
     }
 }
@@ -200,6 +201,8 @@ body.conversation {
 
     .button {
         padding: 5px;
+        font-size: 18px;
+        font-family: @font-family-serif;
     }
 
     .likes {
@@ -215,7 +218,94 @@ body.conversation {
     .chat {
         background-color: @dark-gray;
         color: @yellow;
-        font-family: @font-family-serif;
         text-align: right;
+    }
+}
+
+.tip-card {
+    padding: 20px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: @dark-gray;
+    color: white;
+
+    .media-object {
+        width: 60px;
+        margin-right: 20px;
+        color: @yellow;
+
+        h1, h3 {
+            margin-top: 0px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+    }
+
+    a {
+        color: @teal;
+    }
+
+
+    .row {
+        margin: 0;
+    }
+
+    .second-row {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .button {
+        padding: 5px;
+        font-size: 18px;
+        font-family: @font-family-serif;
+        background-color: @dark-gray;
+        color: @yellow;
+        text-align: center;
+        border-top: 2px solid @yellow;
+    }
+
+    .likes {
+        border-right: 1px solid @yellow;
+    }
+    .share {
+        border-left: 1px solid @yellow;
+    }
+}
+
+.qmunnity {
+    background-color: @yellow;
+    color: @dark-gray;
+
+    .row.row--first {
+        margin-bottom: 10px;
+    }
+
+    .action-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        h3 {
+            margin: 0;
+        }
+
+        .button {
+            text-align: center;
+            color: white;
+            padding: 10px;
+        }
+
+        .ask-q {
+            background-color: @teal;
+        }
+
+        .give-tip {
+            background-color: @pink;
+        }
     }
 }
